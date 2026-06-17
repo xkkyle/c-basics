@@ -11,6 +11,9 @@ int main(void) {
   double height;
   char crime[256];
 
+
+  // scanf에는 \n (줄바꿈) 넣지 않기
+  // printf에는 넣어도 됌
   printf("이름이 뭐예요? ");
   scanf("%s", name, sizeof(name));
 
