@@ -10,18 +10,22 @@ int main(void)
   // 정수들을 저장하기 위해서 이것을 int *으로 변환한다. 반드시 필요한 것은 아니다.
   // 할당받을 메모리의 크기를 byte 단위로 지정한다. 여기서는 10개의 정수를 저장하기 위해서 40바이트를 요청하였다.
 
-  p = (int *)malloc(40);
+  p = (int *)malloc(10 * sizeof(*p));
 
   // 예외처리 (매우 예외적인 상황)
   if(p == NULL) {
     /* 동적 메모리 할당이 실패 
     적절한 조치를 취한다.
     */
+    return 1;
   }
 
   p[0] = 12;
   p[1] = 24;
   *(p+2) = 36;
+
+  free(p);
+  p = NULL;
     
 
   // 동적할당(malloc)의 사용 예시 : 배열 키우기
@@ -47,6 +51,9 @@ int main(void)
   *(array + 5) = 5;
   
   printf("답은 %d\n", array[5]);
+
+  free(array);
+  array = NULL;
   
   // 위의 코드는 사실 좋지 않음
 
@@ -56,3 +63,5 @@ int main(void)
   int *array = (int *)malloc(4 * sizeof(int)); // 포인터 변수이기 때문에 언제든 바꿀 수 있다.
   int array[4]; // 배열을 선언할 경우, 첫 번째 변수가 고정되어 불변이므로, 값을 바꿀 수가 없다.
 }
+
+
